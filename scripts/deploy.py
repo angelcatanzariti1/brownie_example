@@ -1,9 +1,10 @@
 from brownie import accounts, config, SimpleStorage
+import brownie.network as network
 
 
 def deploy_simple_storage():
     ## For Ganache accounts
-    account = accounts[0]
+    account = get_account()
     simple_storage = SimpleStorage.deploy({"from":account})
     # Get stored value, calling retrieve function
     stored_value = simple_storage.retrieve()
@@ -22,6 +23,12 @@ def deploy_simple_storage():
     ## For accounts with private keys as env variables (using .env and brownie-config.yaml)
     #account = accounts.add(config["wallets"]["from_key"])
     #print(account)
+
+def get_account():
+    if network.show_active() == "development":
+        return accounts[0]
+    else:
+        return accounts.add(config["wallets"]["from_key"])
 
 def main():
     deploy_simple_storage()
