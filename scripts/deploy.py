@@ -7,7 +7,12 @@ def deploy_simple_storage():
     simple_storage = SimpleStorage.deploy({"from":account})
     #print(simple_storage)
     stored_value = simple_storage.retrieve()
-    print(stored_value)
+    print("Stored value: ", stored_value)
+    transaction = simple_storage.store(15, {"from": account})
+    transaction.wait(1)
+    updated_stored_value = simple_storage.retrieve()
+    print("Updated stored value: ", updated_stored_value)
+
 
     ## For accounts added with 'brownie accounts new'
     #account = accounts.load("angel-account")
