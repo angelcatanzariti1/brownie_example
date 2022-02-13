@@ -5,9 +5,10 @@ def deploy_simple_storage():
     ## For Ganache accounts
     account = accounts[0]
     simple_storage = SimpleStorage.deploy({"from":account})
-    #print(simple_storage)
+    # Get stored value, calling retrieve function
     stored_value = simple_storage.retrieve()
     print("Stored value: ", stored_value)
+    # Update stored value, calling store function
     transaction = simple_storage.store(15, {"from": account})
     transaction.wait(1)
     updated_stored_value = simple_storage.retrieve()
