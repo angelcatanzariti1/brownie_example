@@ -5,7 +5,9 @@ def deploy_simple_storage():
     ## For Ganache accounts
     account = accounts[0]
     simple_storage = SimpleStorage.deploy({"from":account})
-    print(simple_storage)
+    #print(simple_storage)
+    stored_value = simple_storage.retrieve()
+    print(stored_value)
 
     ## For accounts added with 'brownie accounts new'
     #account = accounts.load("angel-account")
